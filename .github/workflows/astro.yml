@@ -34,8 +34,6 @@ jobs:
           export PATH=$PATH:$(npm bin -g)
           pnpm install
           pnpm run build
-          npx server dist
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
