@@ -32,20 +32,8 @@ jobs:
           npm install -g pnpm@latest-10
           pnpm -v
           export PATH=$PATH:$(npm bin -g)
-
-
-      - name: Verify installations
-        run: |
-          node -v
-          npm -v
-          pnpm -v
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Start dev server
-        run: pnpm dev
-
+          pnpm install
+          pnpm dev --host
   deploy:
       needs: build
       runs-on: ubuntu-latest
