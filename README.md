@@ -1,1 +1,1 @@
-# CuioXity.github.io
+# CurioXity.github.io
