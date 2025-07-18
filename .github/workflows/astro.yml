@@ -3,6 +3,12 @@ name: Build Blog with Shell Commands
 on:
   push:
     branches: [master]
+    
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 
 jobs:
   build:
