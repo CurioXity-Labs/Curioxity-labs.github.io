@@ -30,6 +30,7 @@ jobs:
           # Verify npm version:
           npm -v # Should print "10.9.2".
           npm install -g pnpm@latest-10
+          pnpm -v
 
 
       - name: Verify installations
