@@ -33,7 +33,8 @@ jobs:
           pnpm -v
           export PATH=$PATH:$(npm bin -g)
           pnpm install
-          pnpm dev --host
+          pnpm run build
+          npx server dist
   deploy:
       needs: build
       runs-on: ubuntu-latest
