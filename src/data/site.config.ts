@@ -10,7 +10,7 @@ interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-	site: 'https://blog-template-gray.vercel.app/', // Write here your website url
+	site: 'https://curioxity-labs.github.io/CurioXity.github.io/', // Write here your website url
 	author: 'Nikhil & Satyam', // Site author
 	title: 'CurioXity Labs', // Site title.
 	description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', // Description to display in the meta tags
