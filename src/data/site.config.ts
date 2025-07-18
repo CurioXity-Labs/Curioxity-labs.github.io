@@ -13,7 +13,7 @@ export const siteConfig: SiteConfig = {
 	site: 'https://curioxity-labs.github.io/CurioXity.github.io/', // Write here your website url
 	author: 'Nikhil & Satyam', // Site author
 	title: 'CurioXity Labs', // Site title.
-	description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', // Description to display in the meta tags
+	description: 'New Subcommunity from NgKore', // Description to display in the meta tags
 	lang: 'en-GB',
 	ogLocale: 'en_GB',
 	shareMessage: 'Share this post', // Message to share a post on social media
