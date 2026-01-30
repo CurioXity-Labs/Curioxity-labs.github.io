@@ -1,0 +1,85 @@
+---
+import '@/styles/global.css';
+import { ViewTransitions } from 'astro:transitions';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const { 
+  title, 
+  description = "CurioxityLabs: Pioneering Post-Quantum Cryptography, eBPF Observability, and AI/ML Systems. Deep research into the future of secure, intelligent infrastructure.", 
+  image = "/og-image.png" 
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="CurioxityLabs" />
+    <meta name="keywords" content="Post-Quantum Cryptography, PQC, eBPF, AI, Machine Learning, Linux Kernel, Observability, Research, Cybersecurity" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:site_name" content="CurioxityLabs" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.site)} />
+    
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#050505" />
+    
+    <!-- View Transitions -->
+    <ViewTransitions />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "CurioxityLabs",
+      "url": Astro.site,
+      "logo": new URL("/logo.svg", Astro.site),
+      "description": description,
+      "sameAs": [
+        "https://github.com/CurioXity-Labs"
+      ]
+    })} />
+  </head>
+  <body class="bg-deep-space min-h-screen scanlines">
+    <!-- Scanline overlay -->
+    <div class="fixed inset-0 pointer-events-none z-50 opacity-[0.015]" aria-hidden="true">
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent animate-scan"></div>
+    </div>
+    
+    <!-- Main content -->
+    <slot />
+    
+    <!-- Ambient background glow -->
+    <div class="fixed inset-0 pointer-events-none -z-10" aria-hidden="true">
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-electric-cyan/5 rounded-full blur-[100px]"></div>
+      <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-obsidian-purple/5 rounded-full blur-[100px]"></div>
+    </div>
+  </body>
+</html>

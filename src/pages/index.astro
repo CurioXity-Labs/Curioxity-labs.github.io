@@ -1,0 +1,27 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Navigation from '@/components/Navigation.astro';
+import HeroSection from '@/components/HeroSection.astro';
+import ProjectsGrid from '@/components/ProjectsGrid.astro';
+import TerminalFeed from '@/components/TerminalFeed.astro';
+import PeopleSection from '@/components/PeopleSection.astro';
+import AboutSection from '@/components/AboutSection.astro';
+import Footer from '@/components/Footer.astro';
+
+const title = 'CurioxityLabs | Deciphering the Future Stack';
+const description = 'Building PromptRacer, 5G Core, Rust eBPF Tools, CipherTrace, and PQ Traffic Tester. Open-source tools for the next generation of secure, observable systems.';
+---
+
+<BaseLayout title={title} description={description}>
+  <Navigation />
+  
+  <main>
+    <HeroSection />
+    <ProjectsGrid />
+    <TerminalFeed />
+    <PeopleSection />
+    <AboutSection />
+  </main>
+  
+  <Footer />
+</BaseLayout>

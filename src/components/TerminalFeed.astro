@@ -1,0 +1,185 @@
+---
+// Terminal-style Learning Feed component
+const feedItems = [
+  {
+    timestamp: '2026-01-29T14:32:00Z',
+    type: 'code',
+    status: 'success',
+    title: 'PromptRacer v2.1 Released',
+    description: 'New benchmark suite with GPT-4o and Claude 3.5 support',
+    tags: ['PromptRacer', 'Release'],
+  },
+  {
+    timestamp: '2026-01-28T09:15:00Z',
+    type: 'code',
+    status: 'success',
+    title: 'Rust eBPF: XDP Packet Filter v2.3',
+    description: 'Optimized zero-copy packet processing pipeline with 0.8μs latency',
+    tags: ['Rust eBPF', 'XDP'],
+  },
+  {
+    timestamp: '2026-01-27T16:45:00Z',
+    type: 'research',
+    status: 'success',
+    title: 'CipherTrace: CBOM Generation Complete',
+    description: 'Detected 847 cryptographic operations across test infrastructure',
+    tags: ['CipherTrace', 'CBOM'],
+  },
+  {
+    timestamp: '2026-01-26T11:20:00Z',
+    type: 'lab_note',
+    status: 'warning',
+    title: '5G Core: UPF Performance Testing',
+    description: 'User Plane Function achieving 8.2Gbps, targeting 10Gbps',
+    tags: ['5G Core', 'Performance'],
+  },
+  {
+    timestamp: '2026-01-25T08:00:00Z',
+    type: 'research',
+    status: 'success',
+    title: 'PQ Traffic Tester: Kyber-1024 Benchmarks',
+    description: 'Measured 2.3ms handshake overhead with hybrid TLS 1.3',
+    tags: ['PQ Tester', 'Kyber'],
+  },
+  {
+    timestamp: '2026-01-24T14:10:00Z',
+    type: 'code',
+    status: 'success',
+    title: 'CipherTrace: New Algorithm Detection',
+    description: 'Added support for SPHINCS+ and Dilithium signature detection',
+    tags: ['CipherTrace', 'PQC'],
+  },
+];
+
+const formatTimestamp = (iso: string) => {
+  const date = new Date(iso);
+  return date.toISOString().replace('T', ' ').slice(0, 19);
+};
+
+const getTypeIcon = (type: string) => {
+  switch (type) {
+    case 'research': return '📊';
+    case 'code': return '💻';
+    case 'lab_note': return '🔬';
+    default: return '📄';
+  }
+};
+---
+
+<section class="relative py-24 overflow-hidden" id="feed">
+  <!-- Background effects -->
+  <div class="absolute inset-0 cyber-grid opacity-20"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-deep-space via-transparent to-deep-space"></div>
+  
+  <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+        Dev <span class="text-terminal-green">Feed</span>
+      </h2>
+      
+      <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+        Project updates, releases, and development notes from CurioxityLabs.
+      </p>
+    </div>
+    
+    <!-- Terminal window -->
+    <div class="rounded-xl border border-white/10 bg-deep-space-light/80 backdrop-blur-sm overflow-hidden shadow-2xl">
+      <!-- Terminal header -->
+      <div class="flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/10">
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 rounded-full bg-error-red/80"></div>
+          <div class="w-3 h-3 rounded-full bg-warning-amber/80"></div>
+          <div class="w-3 h-3 rounded-full bg-terminal-green/80"></div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="mono-label text-gray-500">curioxity@lab</span>
+          <span class="mono-label text-electric-cyan">~/projects</span>
+        </div>
+        <div class="w-4"></div>
+      </div>
+      
+      <!-- Terminal content -->
+      <div class="p-4 max-h-[500px] overflow-y-auto font-mono text-sm">
+        <!-- Welcome message -->
+        <div class="mb-4 pb-4 border-b border-white/5">
+          <div class="text-electric-cyan">$ tail -f /var/log/curioxity/research.log</div>
+          <div class="text-gray-500 mt-1">--- Streaming research feed ---</div>
+        </div>
+        
+        <!-- Feed items -->
+        <div class="space-y-4">
+          {feedItems.map((item) => (
+            <div class="group rounded-lg p-3 hover:bg-white/5 transition-colors duration-200 border-l-2 border-transparent hover:border-electric-cyan/50">
+              <!-- Timestamp and status -->
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-gray-500">[{formatTimestamp(item.timestamp)}]</span>
+                <span class={`px-2 py-0.5 rounded text-[10px] uppercase font-bold ${
+                  item.status === 'success' 
+                    ? 'bg-terminal-green/20 text-terminal-green' 
+                    : item.status === 'warning'
+                    ? 'bg-warning-amber/20 text-warning-amber'
+                    : 'bg-error-red/20 text-error-red'
+                }`}>
+                  {item.status === 'success' ? '✓ OK' : item.status === 'warning' ? '⚠ WIP' : '✗ ERR'}
+                </span>
+                <span class="text-gray-600">{getTypeIcon(item.type)}</span>
+              </div>
+              
+              <!-- Content -->
+              <div class="pl-4">
+                <div class="text-white font-medium group-hover:text-electric-cyan transition-colors">
+                  {item.title}
+                </div>
+                <div class="text-gray-400 text-xs mt-1">
+                  {item.description}
+                </div>
+                
+                <!-- Tags -->
+                <div class="flex flex-wrap gap-2 mt-2">
+                  {item.tags.map((tag) => (
+                    <span class="px-1.5 py-0.5 rounded text-[10px] bg-white/5 text-gray-500 border border-white/5">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <!-- Cursor line -->
+        <div class="flex items-center gap-2 mt-6 pt-4 border-t border-white/5">
+          <span class="text-electric-cyan">$</span>
+          <span class="w-2 h-4 bg-electric-cyan animate-terminal-blink"></span>
+        </div>
+      </div>
+      
+      <!-- Terminal footer -->
+      <div class="flex items-center justify-between px-4 py-2 bg-white/5 border-t border-white/10">
+        <div class="flex items-center gap-4">
+          <span class="mono-label text-gray-500">ENTRIES: {feedItems.length}</span>
+          <span class="mono-label text-gray-500">|</span>
+          <span class="mono-label text-terminal-green">CPU_OPTIMIZED: TRUE</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="mono-label text-gray-500">BUFFER:</span>
+          <span class="mono-label text-electric-cyan">8KB</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- View all link -->
+    <div class="flex justify-center mt-8">
+      <a 
+        href="/blog" 
+        class="group inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/20 text-gray-400 hover:text-white hover:border-electric-cyan/50 hover:bg-white/5 transition-all duration-300"
+      >
+        <span class="mono-label">VIEW_ALL_ENTRIES</span>
+        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

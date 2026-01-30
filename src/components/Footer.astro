@@ -1,0 +1,129 @@
+---
+// Footer component
+const currentYear = new Date().getFullYear();
+
+const links = {
+  projects: [
+    { label: 'PromptRacer', href: '#projects' },
+    { label: '5G Core', href: '#projects' },
+    { label: 'Rust eBPF Tools', href: '#projects' },
+    { label: 'CipherTrace', href: '#projects' },
+    { label: 'PQ Traffic Tester', href: '#projects' },
+  ],
+  resources: [
+    { label: 'Blog', href: '/blog' },
+    { label: 'Documentation', href: '/docs' },
+    { label: 'People', href: '/people' },
+    { label: 'GitHub', href: 'https://github.com/CurioXity-Labs' },
+  ],
+  connect: [
+    { label: 'GitHub', href: 'https://github.com/CurioXity-Labs' },
+    { label: 'Twitter', href: '#' },
+    { label: 'Discord', href: '#' },
+  ],
+};
+---
+
+<footer class="relative py-16 border-t border-white/5">
+  <!-- Background -->
+  <div class="absolute inset-0 cyber-grid opacity-10"></div>
+  
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      <!-- Brand -->
+      <div class="lg:col-span-1">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="relative w-10 h-10 flex items-center justify-center">
+            <div class="absolute inset-0 rounded-lg bg-gradient-to-br from-electric-cyan/20 to-obsidian-purple/20"></div>
+            <div class="absolute inset-[2px] rounded-md bg-deep-space"></div>
+            <span class="relative font-mono font-bold text-electric-cyan text-lg">CX</span>
+          </div>
+          <span class="font-semibold text-white">CurioxityLabs</span>
+        </div>
+        
+        <p class="text-gray-400 text-sm mb-4">
+          Building tools at the intersection of cryptography, kernel engineering, and intelligent systems.
+        </p>
+      </div>
+      
+      <!-- Projects Links -->
+      <div>
+        <h4 class="font-semibold text-white mb-4 flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-obsidian-purple"></span>
+          Projects
+        </h4>
+        <ul class="space-y-2">
+          {links.projects.map((link) => (
+            <li>
+              <a 
+                href={link.href} 
+                class="text-gray-400 hover:text-white text-sm transition-colors neon-underline"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      <!-- Resources Links -->
+      <div>
+        <h4 class="font-semibold text-white mb-4 flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-electric-cyan"></span>
+          Resources
+        </h4>
+        <ul class="space-y-2">
+          {links.resources.map((link) => (
+            <li>
+              <a 
+                href={link.href} 
+                class="text-gray-400 hover:text-white text-sm transition-colors neon-underline"
+                target={link.href.startsWith('http') ? '_blank' : undefined}
+                rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      <!-- Connect Links -->
+      <div>
+        <h4 class="font-semibold text-white mb-4 flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-terminal-green"></span>
+          Connect
+        </h4>
+        <ul class="space-y-2">
+          {links.connect.map((link) => (
+            <li>
+              <a 
+                href={link.href} 
+                class="text-gray-400 hover:text-white text-sm transition-colors neon-underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Bottom bar -->
+    <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="text-gray-500 text-sm">
+        &copy; {currentYear} CurioxityLabs. All rights reserved.
+      </div>
+      
+      <div class="flex items-center gap-4 text-gray-500 text-sm">
+        <span class="mono-label">BUILD: v1.0.0</span>
+        <span>|</span>
+        <span class="mono-label">PROTOCOL: HTTPS</span>
+        <span>|</span>
+        <span class="mono-label text-terminal-green">STATUS: OK</span>
+      </div>
+    </div>
+  </div>
+</footer>

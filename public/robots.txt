@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://curioxity-labs.github.io/sitemap.xml

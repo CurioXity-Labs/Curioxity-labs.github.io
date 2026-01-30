@@ -1,0 +1,227 @@
+---
+// Hero section with interactive lattice/matrix background
+---
+
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden" id="hero">
+  <!-- Canvas for interactive shader effect -->
+  <canvas 
+    id="hero-canvas" 
+    class="absolute inset-0 w-full h-full"
+    aria-hidden="true"
+  ></canvas>
+  
+  <!-- Cyber grid overlay -->
+  <div class="absolute inset-0 cyber-grid opacity-50" aria-hidden="true"></div>
+  
+  <!-- Lattice pattern overlay -->
+  <div class="absolute inset-0 lattice-bg opacity-30" aria-hidden="true"></div>
+  
+  <!-- Content -->
+  <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <!-- Main headline -->
+    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
+      <span class="text-white">CurioxityLabs:</span>
+      <br />
+      <span class="shimmer-text">Deciphering the Future Stack</span>
+    </h1>
+    
+    <!-- Sub-headline -->
+    <p class="text-lg sm:text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-8 leading-relaxed">
+      From <span class="text-obsidian-purple font-semibold">Post-Quantum Resiliency</span> to 
+      <span class="text-electric-cyan font-semibold">Kernel-Level Intelligence</span>
+    </p>
+    
+    <!-- Tech stack indicators -->
+    <div class="flex flex-wrap justify-center gap-4 mb-12">
+      <div class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-obsidian-purple/10 border border-obsidian-purple/30">
+        <span class="w-1.5 h-1.5 rounded-full bg-obsidian-purple"></span>
+        <span class="mono-label text-obsidian-purple">POST_QUANTUM</span>
+      </div>
+      <div class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-electric-cyan/10 border border-electric-cyan/30">
+        <span class="w-1.5 h-1.5 rounded-full bg-electric-cyan"></span>
+        <span class="mono-label text-electric-cyan">RUST_eBPF</span>
+      </div>
+      <div class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-terminal-green/10 border border-terminal-green/30">
+        <span class="w-1.5 h-1.5 rounded-full bg-terminal-green"></span>
+        <span class="mono-label text-terminal-green">5G_CORE</span>
+      </div>
+    </div>
+    
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a 
+        href="#projects" 
+        class="group relative px-8 py-4 rounded-lg bg-gradient-to-r from-electric-cyan to-obsidian-purple text-white font-semibold transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,240,255,0.4)] overflow-hidden"
+      >
+        <span class="relative z-10 flex items-center gap-2">
+          View Projects
+          <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </span>
+        <div class="absolute inset-0 bg-gradient-to-r from-obsidian-purple to-electric-cyan opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      </a>
+      
+      <a 
+        href="#feed" 
+        class="group px-8 py-4 rounded-lg border border-white/20 text-white font-semibold transition-all duration-300 hover:border-electric-cyan/50 hover:bg-white/5"
+      >
+        View Dev Feed
+      </a>
+    </div>
+  </div>
+  
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-500">
+    <div class="w-6 h-10 rounded-full border-2 border-gray-600 p-1">
+      <div class="w-1.5 h-3 bg-electric-cyan rounded-full animate-bounce mx-auto"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Interactive lattice/matrix canvas effect
+  const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
+  if (canvas) {
+    const ctx = canvas.getContext('2d')!;
+    let mouseX = 0;
+    let mouseY = 0;
+    let animationId: number;
+    
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    
+    resize();
+    window.addEventListener('resize', resize);
+    
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+    
+    // Node class for lattice points
+    class Node {
+      x: number;
+      y: number;
+      baseX: number;
+      baseY: number;
+      vx: number;
+      vy: number;
+      
+      constructor(x: number, y: number) {
+        this.x = x;
+        this.y = y;
+        this.baseX = x;
+        this.baseY = y;
+        this.vx = 0;
+        this.vy = 0;
+      }
+      
+      update() {
+        const dx = mouseX - this.x;
+        const dy = mouseY - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const maxDist = 150;
+        
+        if (dist < maxDist) {
+          const force = (maxDist - dist) / maxDist;
+          this.vx -= (dx / dist) * force * 2;
+          this.vy -= (dy / dist) * force * 2;
+        }
+        
+        // Spring back to base position
+        this.vx += (this.baseX - this.x) * 0.03;
+        this.vy += (this.baseY - this.y) * 0.03;
+        
+        // Damping
+        this.vx *= 0.9;
+        this.vy *= 0.9;
+        
+        this.x += this.vx;
+        this.y += this.vy;
+      }
+    }
+    
+    // Create grid of nodes
+    const spacing = 50;
+    const nodes: Node[] = [];
+    
+    const createNodes = () => {
+      nodes.length = 0;
+      const cols = Math.ceil(canvas.width / spacing) + 1;
+      const rows = Math.ceil(canvas.height / spacing) + 1;
+      
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          nodes.push(new Node(i * spacing, j * spacing));
+        }
+      }
+    };
+    
+    createNodes();
+    window.addEventListener('resize', createNodes);
+    
+    // Animation loop
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Update and draw nodes
+      nodes.forEach(node => node.update());
+      
+      // Draw connections
+      ctx.strokeStyle = 'rgba(0, 240, 255, 0.08)';
+      ctx.lineWidth = 1;
+      
+      nodes.forEach((node, i) => {
+        nodes.forEach((other, j) => {
+          if (i >= j) return;
+          
+          const dx = other.x - node.x;
+          const dy = other.y - node.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist < spacing * 1.5) {
+            const alpha = 1 - dist / (spacing * 1.5);
+            ctx.strokeStyle = `rgba(0, 240, 255, ${alpha * 0.1})`;
+            ctx.beginPath();
+            ctx.moveTo(node.x, node.y);
+            ctx.lineTo(other.x, other.y);
+            ctx.stroke();
+          }
+        });
+      });
+      
+      // Draw nodes
+      nodes.forEach(node => {
+        const dx = mouseX - node.x;
+        const dy = mouseY - node.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const maxDist = 200;
+        
+        let alpha = 0.3;
+        let size = 2;
+        
+        if (dist < maxDist) {
+          alpha = 0.3 + (1 - dist / maxDist) * 0.7;
+          size = 2 + (1 - dist / maxDist) * 2;
+        }
+        
+        ctx.fillStyle = `rgba(0, 240, 255, ${alpha})`;
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      
+      animationId = requestAnimationFrame(animate);
+    };
+    
+    animate();
+    
+    // Cleanup on page navigation
+    document.addEventListener('astro:before-swap', () => {
+      cancelAnimationFrame(animationId);
+    });
+  }
+</script>

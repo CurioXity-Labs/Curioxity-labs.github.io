@@ -1,0 +1,77 @@
+---
+// Navigation component with futuristic styling
+const navLinks = [
+  { href: '#projects', label: 'Projects' },
+  { href: '#feed', label: 'Dev Feed' },
+  { href: '/people', label: 'People' },
+  { href: '#about', label: 'About' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-40 backdrop-blur-dark border-b border-white/5">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 group" aria-label="CurioxityLabs Home">
+        <div class="relative w-10 h-10 flex items-center justify-center">
+          <!-- Animated logo container -->
+          <div class="absolute inset-0 rounded-lg bg-gradient-to-br from-electric-cyan/20 to-obsidian-purple/20 group-hover:from-electric-cyan/30 group-hover:to-obsidian-purple/30 transition-all duration-300"></div>
+          <div class="absolute inset-[2px] rounded-md bg-deep-space"></div>
+          <span class="relative font-mono font-bold text-electric-cyan text-lg">CX</span>
+        </div>
+        <div class="hidden sm:flex flex-col">
+          <span class="font-semibold text-white tracking-tight">CurioxityLabs</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-1">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="relative px-4 py-2 text-sm font-medium text-gray-400 hover:text-white transition-colors duration-200 neon-underline group"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="flex items-center gap-4">
+        <button 
+          type="button" 
+          class="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+          aria-label="Toggle menu"
+          id="mobile-menu-button"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="hidden md:hidden border-t border-white/5" id="mobile-menu">
+    <div class="px-4 py-4 space-y-2">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="flex items-center justify-between px-4 py-3 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+        >
+          <span>{link.label}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<script>
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  menuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+</script>

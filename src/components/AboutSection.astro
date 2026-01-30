@@ -1,0 +1,90 @@
+---
+// About section
+const stats = [
+  { value: '5', label: 'Active Projects' },
+  { value: 'Rust', label: 'Primary Language' },
+  { value: 'OSS', label: 'Open Source' },
+  { value: '∞', label: 'Curiosity Level' },
+];
+---
+
+<section class="relative py-24 overflow-hidden" id="about">
+  <!-- Background -->
+  <div class="absolute inset-0 lattice-bg opacity-20"></div>
+  
+  <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Content -->
+      <div>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
+          The <span class="gradient-text">Curious</span> Approach
+        </h2>
+        
+        <div class="space-y-4 text-gray-400 leading-relaxed">
+          <p>
+            CurioxityLabs builds open-source tools for the next generation of secure, observable, 
+            and intelligent infrastructure.
+          </p>
+          
+          <p>
+            Our projects span <span class="text-terminal-green font-medium">PromptRacer</span> for AI prompt optimization,
+            a cloud-native <span class="text-electric-cyan font-medium">5G Core</span>, 
+            high-performance <span class="text-electric-cyan font-medium">Rust eBPF tools</span>,
+            <span class="text-obsidian-purple font-medium">CipherTrace</span> for cryptographic inventory, and
+            <span class="text-obsidian-purple font-medium">PQ Traffic Tester</span> for post-quantum validation.
+          </p>
+          
+          <p>
+            Our philosophy: <span class="text-white font-medium">deep curiosity meets rigorous engineering</span>. 
+            Every line of code is crafted with the precision of a systems engineer 
+            and the wonder of an explorer.
+          </p>
+        </div>
+        
+        <!-- CTA -->
+        <div class="mt-8">
+          <a 
+            href="https://github.com/CurioXity-Labs" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white/5 border border-white/20 text-white hover:border-electric-cyan/50 hover:bg-white/10 transition-all duration-300"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+            </svg>
+            Explore Our Repository
+          </a>
+        </div>
+      </div>
+      
+      <!-- Stats / Visual -->
+      <div class="relative">
+        <!-- Main card -->
+        <div class="rounded-xl border border-white/10 bg-deep-space-light/50 backdrop-blur-sm p-8">
+          <!-- Corner accents -->
+          <div class="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-electric-cyan/30 rounded-tl-xl"></div>
+          <div class="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-obsidian-purple/30 rounded-br-xl"></div>
+          
+          <!-- Stats grid -->
+          <div class="grid grid-cols-2 gap-6">
+            {stats.map((stat, index) => (
+              <div class={`text-center p-4 rounded-lg ${
+                index % 2 === 0 ? 'bg-electric-cyan/5' : 'bg-obsidian-purple/5'
+              }`}>
+                <div class={`text-3xl font-bold font-mono ${
+                  index % 2 === 0 ? 'text-electric-cyan' : 'text-obsidian-purple'
+                }`}>
+                  {stat.value}
+                </div>
+                <div class="mono-label text-gray-500 mt-1">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+          
+          <!-- Floating accent elements -->
+          <div class="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-electric-cyan/10 blur-2xl"></div>
+        <div class="absolute -bottom-4 -left-4 w-24 h-24 rounded-full bg-obsidian-purple/10 blur-2xl"></div>
+      </div>
+    </div>
+  </div>
+</section>

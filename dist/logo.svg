@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" fill="none">
+  <rect width="200" height="50" rx="8" fill="#050505"/>
+  <rect x="4" y="4" width="42" height="42" rx="6" fill="#050505" stroke="url(#logo-gradient)" stroke-width="2"/>
+  <text x="25" y="32" font-family="monospace" font-weight="bold" font-size="16" fill="#00f0ff" text-anchor="middle">CX</text>
+  <text x="60" y="28" font-family="system-ui, sans-serif" font-weight="600" font-size="16" fill="white">CurioxityLabs</text>
+  <text x="60" y="42" font-family="monospace" font-size="8" fill="#00f0ff" letter-spacing="1">RESEARCH_ACTIVE</text>
+  <defs>
+    <linearGradient id="logo-gradient" x1="4" y1="4" x2="46" y2="46" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00f0ff" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+</svg>
